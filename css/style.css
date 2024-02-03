@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+}
+
+img{
+    width: 120px;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: transparent;
+    border-bottom: 2px dashed green;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99999;
+}
+nav::after{
+    background-color: black;
+}
+nav span{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+nav li{
+    background-color: aqua;
+    margin-right: 1rem;
+    padding: 1rem 1rem;
+    list-style: none;
+    border-radius: 1rem;
+    font-size: 15;
+}
