@@ -1,104 +1,409 @@
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<title>mikrotik hotspot > status</title>
-$(if refresh-timeout)
-<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
-$(endif)
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<style type="text/css">
-<!--
-textarea,input,select {
-	background-color: #FDFBFB;
-	border: 1px #BBBBBB solid;
-	padding: 2px;
-	margin: 1px;
-	font-size: 14px;
-	color: #808080;
-}
-
-.tabula{
- 
-border-width: 1px; 
-border-collapse: collapse; 
-border-color: #c1c1c1; 
-background-color: transparent;
-font-family: verdana;
-font-size: 11px;
-}
-
-body{ color: #737373; font-size: 12px; font-family: verdana; }
-
-a, a:link, a:visited, a:active { color: #AAAAAA; text-decoration: none; font-size: 12px; }
-a:hover { border-bottom: 1px dotted #c1c1c1; color: #AAAAAA; }
-img {border: none;}
-td { font-size: 12px; padding: 4px;}
-
--->
-</style>
-<script language="JavaScript">
-<!--
-$(if advert-pending == 'yes')
-    var popup = '';
-    function focusAdvert() {
-	if (window.focus) popup.focus();
-    }
-    function openAdvert() {
-	popup = open('$(link-advert)', 'hotspot_advert', '');
-	setTimeout("focusAdvert()", 1000);
-    }
-$(endif)
-    function openLogout() {
-	if (window.name != 'hotspot_status') return true;
-        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
-	window.close();
-	return false;
-    }
-//-->
-</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MI-Oreo</title>
+    $(if refresh-timeout)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+    $(endif)
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,400i,500i,700%7CRoboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="css\bootstrap.min.css">
+    <link rel="stylesheet" href="plugins\swiper\swiper.min.css">
+    <link rel="stylesheet" href="plugins\magnific-popup\magnific-popup.min.css">
+    <link rel="stylesheet" href="plugins\color-switcher\color-switcher.css">
+    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css\responsive.css">
+    <link rel="stylesheet" href="css\colors\theme-color-1.css">
+    <link rel="stylesheet" href="css\custom.css">
 </head>
-<body bottommargin="0" topmargin="0" leftmargin="0" rightmargin="0"
-$(if advert-pending == 'yes')
-	onLoad="openAdvert()"
-$(endif)
->
-<table width="100%" height="100%">
-
-<tr>
-<td align="center" valign="middle">
-<form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
-<table border="1" class="tabula">
-$(if login-by == 'trial')
-	<br><div style="text-align: center;">Welcome trial user!</div><br>
-$(elif login-by != 'mac')
-	<br><div style="text-align: center;">Welcome $(username)!</div><br>
-$(endif)
-	<tr><td align="right">IP address:</td><td>$(ip)</td></tr>
-	<tr><td align="right">bytes up/down:</td><td>$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
-$(if session-time-left)
-	<tr><td align="right">connected / left:</td><td>$(uptime) / $(session-time-left)</td></tr>
-$(else)
-	<tr><td align="right">connected:</td><td>$(uptime)</td></tr>
-$(endif)
-$(if blocked == 'yes')
-	<tr><td align="right">status:</td><td><div style="color: #FF8080">
-<a href="$(link-advert)" target="hotspot_advert">advertisement</a> required</div></td>
-$(elif refresh-timeout)
-	<tr><td align="right">status refresh:</td><td>$(refresh-timeout)</td>
-$(endif)
-
-</table>
-$(if login-by-mac != 'yes')
-<br>
-<!-- user manager link. if user manager resides on other router, replace $(hostname) by its address
-<button onclick="document.location='http://$(hostname)/user?subs='; return false;">status</button>
-<!-- end of user manager link -->
-<input type="submit" value="log off">
-$(endif)
-</form>
-
-</td>
-</table>
+<!-- 
+======================================================
+created     : Lalat Merah
+situs       : gerakanopensource.wordpress.com
+whatsapp    : 082-120-215-248
+ig          : @alpuketmerah
+====================================================== 
+-->
+<body>
+    <div class="preLoader"></div>
+    <header class="header">
+        <div class="main-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 col-md-3 col-sm-3 col-9">
+                        <div class="logo" data-animate="fadeInUp" data-delay=".7">
+                            <a href="login.html"> <img src="img\logo.png" alt="MI_Oreo"> </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-5 col-sm-3 col-3">
+                        <nav data-animate="fadeInUp" data-delay=".9">
+                            <div class="header-menu">
+                                <ul>
+                                    <li><a href="login.html">Home</a></li>
+                                    <li class="active"><a href="status.html">Status</a></li>
+                                    <li><a href="logout.html?erase-cookie=true">Logout</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="position-relative bg-light pt-4 pb-4">
+        <div id="particles_js"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="banner-content">
+                        <h1 data-animate="fadeInUp" data-delay="1.2">MI-Oreo Best Internet Service Provider In 2019</h1>
+                        <h2 data-animate="fadeInUp" data-delay="1.3"><span class="typed"></span></h2>
+                        <h4 data-animate="fadeInUp" data-delay="1.4">Status Penggunaan Internet</h4></br>
+                    </div>
+                    <table class="table" data-animate="fadeInUp" data-delay="1.4">
+                        <tbody class="align-l">
+                            <tr>
+                            <td>Username</td>
+                            <td>$(username)</td>
+                            </tr>
+                            <tr>
+                            <td>IP Address</td>
+                            <td>$(ip)</td>
+                            </tr>
+                            <tr>
+                            <td>MAC Address</td>
+                            <td>$(mac)</td>
+                            </tr>
+                            $(if session-time-left)
+                            <tr>
+                            <td>Connected / left</td>
+                            <td>$(uptime) / $(session-time-left)</td>
+                            </tr>
+                            $(else)
+                            <tr>
+                            <td>Connected</td>
+                            <td>$(uptime)</td>
+                            </tr>
+                            $(endif)
+                            <tr>
+                            <td>Download / Upload</td>
+                            <td>$(bytes-out-nice) / $(bytes-in-nice)</td>
+                            </tr>
+                            $(if limit-bytes-total)
+                            <tr>
+                            <td>Sisa Kuota</td>
+                            <td>$(if limit-bytes-total) 
+                                <script language=javascript>result = ($(limit-bytes-total)/1000000).toFixed(2)
+                                document.write(result)</script> MiB
+                                $(endif)
+                                $(if limit-bytes-total == '')Unlimited$(endif)</td>
+                            </tr>
+                            $(else)
+                            <tr>
+                            <td>Sisa Kuota</td>
+                            <td>$(if limit-bytes-out) 
+                                <script language=javascript>result = ($(limit-bytes-out)/1000000).toFixed(2)
+                                document.write(result)</script> MiB
+                                $(endif)
+                                $(if limit-bytes-out == '')Unlimited$(endif)</td>
+                            </tr>
+                            $(endif)
+                            $(if refresh-timeout)
+                            <tr>
+                            <td>Status refresh</td>
+                            <td>$(refresh-timeout)</td>
+                            </tr>
+                            $(endif)
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block ">
+                    <div class="banner-image"> <img src="img\slide.png" alt="" data-animate="fadeInUp" data-delay="1.4" data-depth="0.2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-7 pb-5-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="single-feature text-center" data-animate="fadeInUp" data-delay=".1"> <img src="img\icons\vpn.svg" alt="" data-no-retina="" class="svg">
+                        <h3>Internet super cepat</h3>
+                        <p>Layanan internet super cepat, unlimited dan murah.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-feature text-center" data-animate="fadeInUp" data-delay=".3"> <img src="img\icons\support.svg" alt="" data-no-retina="" class="svg">
+                        <h3>24/7 Technical Support</h3>
+                        <p>Layanan support 24/7 jika terjadi gangguan.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-feature text-center" data-animate="fadeInUp" data-delay=".5"> <img src="img\icons\guarantee.svg" alt="" data-no-retina="" class="svg">
+                        <h3>Garansi 7 hari uang kembali</h3>
+                        <p>Jika tidak puas uang kembali dalam 7 hari.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="services-title position-relative pt-7" data-bg-img="img/buildings.jpg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-8">
+                        <div class="section-title text-center">
+                            <h2 class="text-white" data-animate="fadeInUp" data-delay=".1">Service</h2>
+                            <p class="text-white" data-animate="fadeInUp" data-delay=".3">Beberapa layanan di MI-Oreo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="services-wrap bg-white position-relative pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".05"> <img src="img\icons\security.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Perlindungan Privacy</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".1"> <img src="img\icons\speed.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Streaming Tanpa Buffer</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".15"> <img src="img\icons\device.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Akses VPN</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".2"> <img src="img\icons\internet.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Koneksi Internet Terenkripsi</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".25"> <img src="img\icons\network.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Jangkauan Wireless Luas</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".3"> <img src="img\icons\virus.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Block Konten Malicious</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".35"> <img src="img\icons\bandwidth.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Unlimited Bandwidth</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".4"> <img src="img\icons\trial.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Trial 2 Hari Gratis</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".45"> <img src="img\icons\website.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Block Konten Negatif</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".5"> <img src="img\icons\settings.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Setting Cepat & Mudah</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".55"> <img src="img\icons\team.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Support Teknisi Ahli</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-service" data-animate="fadeInUp" data-delay=".6"> <img src="img\icons\money.svg" alt="" data-no-retina="" class="svg">
+                            <h4>Garansi 7 Hari Uang Kembali</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="roboto text-center font-weight-medium" data-animate="fadeInUp" data-delay=".65">
+                    <p>Jika ada pertanyaan silakan dm instagram <a href="https://instagram.com/alpuketmerah/" target="_blank">@alpuketmerah</a> atau
+                        <br>Whatsapp <a href="https://wa.me/6281211326207?text=ping" target="_blank">(+62) 81-211-326-207</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pricing-plans pt-7 pb-7">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="section-title">
+                        <h2 data-animate="fadeInUp" data-delay=".1">Harga Paket</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="pricing-features">
+                        <h3 class="cabin" data-animate="fadeInUp" data-delay=".5">The features included with this pricing plan. let’s see what features will you getting.</h3>
+                        <ul class="list-unstyled list-item clearfix">
+                            <li data-animate="fadeInUp" data-delay=".1"><i class="fas fa-check-circle"></i>Unlimited bandwidth</li>
+                            <li data-animate="fadeInUp" data-delay=".15"><i class="fas fa-check-circle"></i>Full Speed</li>
+                            <li data-animate="fadeInUp" data-delay=".2"><i class="fas fa-check-circle"></i>Customer Support</li>
+                            <li data-animate="fadeInUp" data-delay=".25"><i class="fas fa-check-circle"></i>Easy To Use</li>
+                            <li data-animate="fadeInUp" data-delay=".3"><i class="fas fa-check-circle"></i>P2P Akses</li>
+                            <li data-animate="fadeInUp" data-delay=".35"><i class="fas fa-check-circle"></i>Double encryption</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="pricing-slides text-center">
+                        <div class="swiper-container pricing-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide single-pricing-slide">
+                                    <div class="single-pricing-plan"> <img src="img\icons\startup.svg" alt="" data-no-retina="" class="svg">
+                                        <h4>Bronze</h4> <span class="time roboto">One Month Plan</span> <strong class="roboto">Rp 50K <sub>/bulan</sub></strong>
+                                        <p>Harga <span>Rp 50K</span> Per bulan
+                                            <br>Garansi 7 Hari Uang Kembali</p> <a href="#" class="btn btn-primary">Get This Plan</a></div>
+                                </div>
+                                <div class="swiper-slide single-pricing-slide">
+                                    <div class="single-pricing-plan"> <img src="img\icons\enterprise.svg" alt="" data-no-retina="" class="svg">
+                                        <h4>Silver</h4> <span class="time roboto">One Month Plan</span> <strong class="roboto">Rp 100K <sub>/bulan</sub></strong>
+                                        <p>Harga <span>Rp 100K/span> Per bulan
+                                            <br>Garansi 7 Hari Uang Kembali</p> <a href="#" class="btn btn-primary">Get This Plan</a></div>
+                                </div>
+                                <div class="swiper-slide single-pricing-slide">
+                                    <div class="single-pricing-plan"> <img src="img\icons\bandwidth.svg" alt="" data-no-retina="" class="svg">
+                                        <h4>Gold</h4> <span class="time roboto">One Month Plan</span> <strong class="roboto">Rp 150K <sub>/bulan</sub></strong>
+                                        <p>Harga <span>Rp 150K</span> Per bulan
+                                            <br>Garansi 7 Hari Uang Kembali</p> <a href="#" class="btn btn-primary">Get This Plan</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination pricing-pagination position-static"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-7 pb-7 bg-light">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2 data-animate="fadeInUp" data-delay=".1">Testimoni Client</h2></div>
+            <div class="swiper-container review-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide single-review-slide">
+                        <h4>Amoeba <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></h4> <span>Jakarta Pusat</span>
+                        <p>Akses Internet Cepat tanpa buffer.</p>
+                    </div>
+                    <div class="swiper-slide single-review-slide">
+                        <h4>Molusca <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></h4> <span>Jakarta Utara</span>
+                        <p>Internet Unlimited bebas download apa saja.</p>
+                    </div>
+                    <div class="swiper-slide single-review-slide">
+                        <h4>Ganggang <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></h4> <span>Jakarta Selatan</span>
+                        <p>Main game lancar tanpa lag.</p>
+                    </div>
+                    <div class="swiper-slide single-review-slide">
+                        <h4>Porifera <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></h4> <span>Jakarta Barat</span>
+                        <p>Pelayanan cepat gak perlu nunggu lama.</p>
+                    </div>
+                    <div class="swiper-slide single-review-slide">
+                        <h4>Annelida <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></h4> <span>Jakarta Timur</span>
+                        <p>Layanan paling oke, support 24jam.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination review-pagination position-static"></div>
+        </div>
+    </section>
+    <footer class="main-footer bg-primary pt-2">
+        <div class="container">
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12">
+                    <div class="footer-info">
+                        <h3 class="text-white" data-animate="fadeInUp" data-delay="0">Kontak</h3>
+                        <ul class="footer-contacts list-unstyled">
+                            <p data-animate="fadeInUp" data-delay=".1">telp: <a href="tel:+6281211326207" target="_blank">(+62) 81-211-326-207</a> , <a href="tel:+6282120215248">(+62) 82-120-215-248</a></p>
+                            <p data-animate="fadeInUp" data-delay=".15">email: <a href="mailto:info@icmp.my.id" target="_blank">info@icmp.my.id</a></p>
+                            <p data-animate="fadeInUp" data-delay=".2">alamat: <a href="https://goo.gl/maps/ZNLsBkdQR7y" target="_blank">Kota Banjar, Jawa Barat</a></p>
+                        </ul>
+                        <ul class="social-links list-inline mb-0">
+                            <li data-animate="fadeInUp" data-delay=".25"><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li data-animate="fadeInUp" data-delay=".3"><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li data-animate="fadeInUp" data-delay=".35"><a href="#" target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li data-animate="fadeInUp" data-delay=".4"><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li data-animate="fadeInUp" data-delay=".45"><a href="#" target="_blank"><i class="fas fa-rss"></i></a></li>
+                            <li data-animate="fadeInUp" data-delay=".5"><a href="https://instagram.com/alpuketmerah/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-footer">
+                <div class="row">
+                    <div class="col-md-5 order-last order-md-first">
+                        <p class="copyright" data-animate="fadeInDown" data-delay=".85">&copy; Copyright 2019 <a href="http://gerakanopensource.wordpress.com">gerakanopensource.wordpress.com</a></p>
+                    </div>
+                    <div class="col-md-7 order-first order-md-last">
+                        <ul class="footer-menu list-inline text-md-right mb-md-0" data-animate="fadeInDown" data-delay=".95">
+                            <li><a href="#">Afilliate</a></li>
+                            <li>|</li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li>|</li>
+                            <li><a href="#">Termns & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="back-to-top">
+        <a href="#"> <i class="fas fa-arrow-up"></i></a>
+    </div>
+    <script src="js\jquery-3.2.1.min.js"></script>
+    <script>
+        FontAwesomeConfig = {
+            searchPseudoElements: true
+        };
+    </script>
+    <script src="js\fontawesome-all.min.js"></script>
+    <script src="js\bootstrap.bundle.min.js"></script>
+    <script src="plugins\typed.js\typed.min.js"></script>
+    <script src="plugins\waypoints\jquery.waypoints.min.js"></script>
+    <script src="plugins\waypoints\sticky.min.js"></script>
+    <script src="plugins\swiper\swiper.min.js"></script>
+    <script src="plugins\particles.js\particles.min.js"></script>
+    <script src="plugins\particles.js\particles.settings.js"></script>
+    <script src="plugins\magnific-popup\jquery.magnific-popup.min.js"></script>
+    <script src="plugins\parsley\parsley.min.js"></script>
+    <script src="plugins\parallax\parallax.min.js"></script>
+    <script src="plugins\retinajs\retina.min.js"></script>
+    <script src="js\menu.min.js"></script>
+    <script src="js\scripts.js"></script>
+    <script src="js\custom.js"></script>
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/5c33568c280f3649d4f3f644/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        });
+        </script>
+        <script type="text/javascript">
+        <!--
+        document.login.username.focus();
+        //-->
+    </script>
 </body>
+
 </html>
