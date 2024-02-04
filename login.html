@@ -24,6 +24,7 @@ whatsapp    : -
 ig          : @musgun.it
 ====================================================== 
 -->
+
 <body>
     $(if chap-id)
     <form name="sendin" action="$(link-login-only)" method="post">
@@ -34,14 +35,14 @@ ig          : @musgun.it
     </form>
     <script type="text/javascript" src="/md5.js"></script>
     <script type="text/javascript">
-    <!--
+        <!--
         function doLogin() {
-        document.sendin.username.value = document.login.username.value;
-        document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
-        document.sendin.submit();
-        return false;
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
         }
-    //-->
+        //-->
     </script>
     $(endif)
     <div class="preLoader"></div>
@@ -77,12 +78,13 @@ ig          : @musgun.it
                     <div class="banner-content">
                         <h1 data-animate="fadeInUp" data-delay="1.2">YAYASAN PENDIDIKAN ISLAM DARUL IMAN ACEH TENGGARA</h1>
                         <h2 data-animate="fadeInUp" data-delay="1.3"><span class="typed"></span></h2>
-                        <h4 data-animate="fadeInUp" data-delay="1.4">Selamat datang di layanan Daman.di Hotspot</h4></br>
+                        <h4 data-animate="fadeInUp" data-delay="1.4">Selamat datang di layanan Daman.di Hotspot</h4>
+                        </br>
                     </div>
                     <div class="card-block py-lg px-md" data-animate="fadeInUp" data-delay="1.4">
                         <form id="loginForm" class="md-form form-light" role="form" action="$(link-login-only)" method="post">
-                            <input type="hidden" name="dst" value="$(link-orig)"/>
-                            <input type="hidden" name="popup" value="true"/>
+                            <input type="hidden" name="dst" value="$(link-orig)" />
+                            <input type="hidden" name="popup" value="true" />
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -103,18 +105,18 @@ ig          : @musgun.it
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         $(if error)
-                                            <p>Terjadi kesalahan: $(error)</p>
+                                        <p>Terjadi kesalahan: $(error)</p>
                                         $(endif)
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group mb-0">
                                         <button type="submit" class="btn btn-block btn-primary"><span class="btn-elem-wrap"><span class="text">LOGIN</span></span></button><span style="display: none;" class="form-notify help-block mb-0"></span>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <div style="font-size: 10px" align=center>Powered by MikroTik RouterOS</div>                           
+                                        <div style="font-size: 10px" align=center>Powered by MikroTik RouterOS</div>
                                     </div>
                                 </div>
                             </div>
@@ -207,14 +209,15 @@ ig          : @musgun.it
                             <h4>Block Konten Negatif</h4>
                         </div>
                     </div>
-                    </div>
-                </div>
-                <div class="roboto text-center font-weight-medium" data-animate="fadeInUp" data-delay=".65">
-                    <p>Jika ada pertanyaan silakan dm instagram <a href="https://www.instagram.com/musgun.it/?hl=id" target="_blank">@musgun.it</a> atau
-                        <br>Whatsapp <a href="https://wa.me/6281361484242?text=ping" target="_blank">(+62) 81-361-484-242</a></p><p>!!! Jangan Bagikan informasi login (username/password) anda kepada orang lain !!!</p>
-                        
                 </div>
             </div>
+            <div class="roboto text-center font-weight-medium" data-animate="fadeInUp" data-delay=".65">
+                <p>Jika ada pertanyaan silakan dm instagram <a href="https://www.instagram.com/musgun.it/?hl=id" target="_blank">@musgun.it</a> atau
+                    <br>Whatsapp <a href="https://wa.me/6281361484242?text=ping" target="_blank">(+62) 81-361-484-242</a></p>
+                <p>!!! Jangan Bagikan informasi login (username/password) anda kepada orang lain !!!</p>
+
+            </div>
+        </div>
         </div>
     </section>
     <!-- <section class="pricing-plans pt-7 pb-7">
@@ -379,22 +382,22 @@ ig          : @musgun.it
     $(if chap-id)
     <script type="text/javascript" src="md5.js"></script>
     <script type="text/javascript">
-        $('#loginForm').submit(function () {
+        $('#loginForm').submit(function() {
             var password = $('#inputPassword');
             password.val(hexMD5('$(chap-id)' + password.val() + '$(chap-challenge)'));
         });
     </script>
     $(endif)
     <script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-    });
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
     </script>
     <script type="text/javascript">
-    <!--
-    document.login.username.focus();
-    //-->
+        <!--
+        document.login.username.focus();
+        //-->
     </script>
 </body>
 
